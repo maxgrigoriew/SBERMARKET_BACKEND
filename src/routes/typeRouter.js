@@ -1,6 +1,7 @@
-const Router = require('express');
+import Router from 'express';
+import typeController from '../controllers/typeController.js';
+
 const router = new Router();
-const typeController = require('../controllers/typeController');
 
 router.post('/', typeController.create);
 router.put('/:id', typeController.update);
@@ -8,4 +9,4 @@ router.get('/', typeController.getAll);
 router.get('/:id', typeController.getOne);
 router.post('/:id', typeController.removeOne);
 
-module.exports = router;
+export default router;

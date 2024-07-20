@@ -1,5 +1,5 @@
-const { Type } = require('../models/models');
-const ApiError = require('../error/ApiError');
+import { Type } from '../models/models.js';
+import ApiError from '../error/ApiError.js';
 
 class TypeController {
     async create(req, res, next) {
@@ -77,4 +77,4 @@ class TypeController {
     }
 }
 
-module.exports = new TypeController();
+export default new TypeController();

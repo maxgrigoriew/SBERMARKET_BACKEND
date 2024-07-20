@@ -1,5 +1,5 @@
-const { Brand } = require('../models/models');
-const ApiError = require('../error/ApiError');
+import { Brand } from '../models/models.js';
+import ApiError from '../error/ApiError.js';
 
 class BrandController {
     async create(req, res, next) {
@@ -45,13 +45,11 @@ class BrandController {
 
     async getAll(req, res, next) {
         const brands = await Brand.findAll();
-        console.log('brans', brands);
         return res.json(brands);
     }
 
     async getOne(req, res, next) {
         const { id } = req.params;
-        console.log(req.params);
 
         const brand = await Brand.findOne({
             where: { id: id },
@@ -79,4 +77,4 @@ class BrandController {
     }
 }
 
-module.exports = new BrandController();
+export default new BrandController();

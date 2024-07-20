@@ -1,9 +1,10 @@
-const Router = require('express');
+import Router from 'express';
+import brandRouter from './brandRouter.js';
+import typeRouter from './typeRouter.js';
+
 const router = new Router();
-const brandRouter = require('./brandRouter');
-const typeRouter = require('./typeRouter');
 
 router.use('/brand', brandRouter);
 router.use('/type', typeRouter);
 
-module.exports = router;
+export default router;
