@@ -3,7 +3,7 @@ const router = new Router();
 const brandController = require('../controllers/brandController');
 const checkRoleMiddleware = require('../middleware/CheckRoleMiddleware');
 
-router.post('/', checkRoleMiddleware('ADMIN'), brandController.create);
+router.post('/', brandController.create);
 router.put('/:id', checkRoleMiddleware('ADMIN'), brandController.update);
 router.get('/', brandController.getAll);
 router.get('/:id', brandController.getOne);

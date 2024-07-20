@@ -1,29 +1,29 @@
-const { Brand } = require('../models/models');
+const { Type } = require('../models/models');
 const ApiError = require('../error/ApiError');
 
-class BrandController {
+class TypeController {
     async create(req, res, next) {
         const { name } = req.body;
-        const chechName = await Brand.findOne({
+        const checkName = await Type.findOne({
             where: { name },
         });
 
-        if (chechName) {
-            return next(ApiError.badRequest('Такой бренд уже существует'));
+        if (checkName) {
+            return next(ApiError.badRequest('Такой тип уже существует'));
         }
 
-        const brand = await Brand.create({ name });
-        return res.json(brand);
+        const Type = await Type.create({ name });
+        return res.json(Type);
     }
 
     async update(req, res, next) {
         const { id } = req.params;
 
-        const updatedBrand = await Brand.findOne({
+        const updatedType = await Type.findOne({
                                             where: { id },
                                         })
                                         .then(async () => {
-                                            let brand = await Brand.update(
+                                            let Type = await Type.update(
                                                 {
                                                     name: req.body.name,
                                                 },
@@ -35,47 +35,46 @@ class BrandController {
                                             );
                                         })
                                         .then(() =>
-                                            Brand.findOne({
+                                            Type.findOne({
                                                 where: { id },
                                             }),
                                         );
 
-        return res.json(updatedBrand);
+        return res.json(updatedType);
     }
 
     async getAll(req, res, next) {
-        const brands = await Brand.findAll();
-        return res.json(brands);
+        const types = await Type.findAll();
+        return res.json(types);
     }
 
-    async getOne(req, res, nex) {
+    async getOne(req, res, next) {
         const { id } = req.params;
-        console.log(req.params);
 
-        const brand = await Brand.findOne({
+        const type = await Type.findOne({
             where: { id: id },
         });
 
-        if (!brand) {
-            return next(ApiError.badRequest(`Бренд с ID ${ id } не найден`));
+        if (!type) {
+            return next(ApiError.badRequest(`Тип с ID ${ id } не найден`));
         }
 
-        return res.json(brand);
+        return res.json(type);
     }
 
     async removeOne(req, res, next) {
         const { id } = req.params;
 
-        const brand = await Brand.findOne({
+        const Type = await Type.findOne({
             where: { id },
         });
 
-        if (!brand) {
+        if (!Type) {
             return next(ApiError.badRequest(`Тип с id ${ id } не найден`));
         }
-        brand.destroy();
-        return res.json(brand);
+        Type.destroy();
+        return res.json(Type);
     }
 }
 
-module.exports = new BrandController();
+module.exports = new TypeController();
