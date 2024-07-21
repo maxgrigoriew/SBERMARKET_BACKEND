@@ -1,48 +1,12 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../db.js';
 import { User } from './user.js';
-
-export const Basket = sequelize.define('basket', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-});
-
-export const BasketDevice = sequelize.define('basket_device', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-});
-
-export const Device = sequelize.define('device', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, unique: true, allowNull: false },
-    price: { type: DataTypes.INTEGER, allowNull: false },
-    rating: { type: DataTypes.INTEGER, defaultValue: 0 },
-    img: { type: DataTypes.STRING, allowNull: false },
-});
-
-export const Type = sequelize.define('type', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, unique: true, allowNull: false },
-});
-
-export const Brand = sequelize.define('brand', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, unique: true, allowNull: false },
-});
-
-const Rating = sequelize.define('rating', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    rate: { type: DataTypes.INTEGER, allowNull: false },
-});
-
-export const DeviceInfo = sequelize.define('device_info', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    title: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.STRING, allowNull: false },
-});
-
-export const TypeBrand = sequelize.define('type_brand', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-});
-
+import { Device } from './device.js';
+import { Basket } from './basket.js';
+import { BasketDevice } from './basket_device.js';
+import { Brand } from './brand.js';
+import { DeviceInfo } from './device_info.js';
+import { TypeBrand } from './type_brand.js';
+import { Rating } from './rating.js';
+import { Type } from './type.js';
 
 User.hasOne(Basket);
 Basket.belongsTo(User);

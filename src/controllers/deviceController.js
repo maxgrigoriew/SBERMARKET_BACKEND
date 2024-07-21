@@ -1,29 +1,29 @@
-import { Brand } from '../models/brand.js';
+import { Device } from '../models/device.js';
 import ApiError from '../error/ApiError.js';
 
-class BrandController {
+class DeviceController {
     async create(req, res, next) {
         const { name } = req.body;
-        const checkName = await Brand.findOne({
+        const checkName = await Device.findOne({
             where: { name },
         });
 
         if (checkName) {
-            return next(ApiError.badRequest('Такой бренд уже существует'));
+            return next(ApiError.badRequest('Такой девайс уже существует'));
         }
 
-        const brand = await Brand.create({ name });
-        return res.json(brand);
+        const Device = await Device.create({ name });
+        return res.json(Device);
     }
 
     async update(req, res, next) {
         const { id } = req.params;
 
-        const updatedBrand = await Brand.findOne({
+        const updatedDevice = await Device.findOne({
                                             where: { id },
                                         })
                                         .then(async () => {
-                                            let brand = await Brand.update(
+                                            let Device = await Device.update(
                                                 {
                                                     name: req.body.name,
                                                 },
@@ -35,46 +35,46 @@ class BrandController {
                                             );
                                         })
                                         .then(() =>
-                                            Brand.findOne({
+                                            Device.findOne({
                                                 where: { id },
                                             }),
                                         );
 
-        return res.json(updatedBrand);
+        return res.json(updatedDevice);
     }
 
     async getAll(req, res, next) {
-        const brands = await Brand.findAll();
-        return res.json(brands);
+        const devices = await Device.findAll();
+        return res.json(devices);
     }
 
     async getOne(req, res, next) {
         const { id } = req.params;
 
-        const brand = await Brand.findOne({
+        const type = await Device.findOne({
             where: { id: id },
         });
 
-        if (!brand) {
-            return next(ApiError.badRequest(`Бренд с ID ${ id } не найден`));
+        if (!type) {
+            return next(ApiError.badRequest(`Девайс с ID ${ id } не найден`));
         }
 
-        return res.json(brand);
+        return res.json(type);
     }
 
     async removeOne(req, res, next) {
         const { id } = req.params;
 
-        const brand = await Brand.findOne({
+        const device = await Device.findOne({
             where: { id },
         });
 
-        if (!brand) {
-            return next(ApiError.badRequest(`Тип с id ${ id } не найден`));
+        if (!device) {
+            return next(ApiError.badRequest(`Девайс с id ${ id } не найден`));
         }
-        brand.destroy();
-        return res.json(brand);
+        Device.destroy();
+        return res.json(device);
     }
 }
 
-export default new BrandController();
+export default new DeviceController();
