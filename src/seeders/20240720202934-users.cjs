@@ -1,7 +1,6 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
-export default {
+module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('users', [
       {
