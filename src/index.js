@@ -29,7 +29,6 @@ const start = async () => {
     try {
         await sequelize.authenticate();
         await sequelize.sync();
-        console.log('process.env.DB_NAME', process.env.DB_NAME);
         app.listen(PORT, () => console.log(`Server started on port ${ PORT }`));
     } catch (e) {
         console.log(e);
